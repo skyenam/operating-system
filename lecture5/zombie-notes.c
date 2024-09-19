@@ -49,22 +49,25 @@ int print_state(pid_t pid) {
 }
 
 int main(void) {
-  pid_t pid = fork();
+  pid_t pid = fork(); //we fork to create another process (we have 2 in total).
   if (pid == -1) {
     return errno;
   }
-  if (pid == 0) {
+  if (pid == 0) { //child exists for 2 secs
     sleep(2);
   }
   else {
     int ret;
-    sleep(1);
-    printf("Child process state: ");
-    ret = print_state(pid);
+    sleep(1); //parent sleeps for 1 sec
+    printf("Child process state: "); //wakes up, print child's process state
+    ret = print_state(pid); // note:child should be still sleeping since it's 1 sec in (child is sleeping for 2 sec)
+	  //would output "Child's proess state: S (sleeping)
     if (ret < 0) { return errno; }
-    sleep(2);
-    printf("Child process state: ");
+    sleep(2); // so we wait another 2 sec
+    printf("Child process state: "); //print child's proces state (3 secs have elapsed)
     ret = print_state(pid);
+	  //would output "Child's process state : Z (zombie) 
+	 	 //zombie means child terminated but wait is not called yet so PID still exists 
     if (ret < 0) { return errno; }
   }
   return 0;
