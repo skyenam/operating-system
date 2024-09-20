@@ -44,3 +44,9 @@ int main(void)
   }
   return 0;
 }
+
+//sooo 
+
+// child 102 died immediately, it cleaned it up (doesnt exist anymore) so it's a (zombie/orphan) and when process 100 exist
+//   process 101 is still running (sleeping for 2 secs), hasnt terminated(not a zombie, but an orphan when process 100 terminates). 
+
