@@ -6,6 +6,11 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+//note!!! quiz 
+// if you did while true fork, did you create zombie processes or not?
+//NO! no process actually terminated. no orphan, no zombie, just ran out of processes. 
+
+
 int print_state(pid_t pid) {
   char buffer[4096];
   int ret = snprintf(buffer, sizeof(buffer), "/proc/%d/status", pid);
